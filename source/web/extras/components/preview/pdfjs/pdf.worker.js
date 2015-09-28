@@ -5214,10 +5214,12 @@ var WidgetAnnotation = (function WidgetAnnotationClosure() {
   var parent = Annotation.prototype;
   Util.inherit(WidgetAnnotation, Annotation, {
     isViewable: function WidgetAnnotation_isViewable() {
+      /*
       if (this.data.fieldType === 'Sig') {
         warn('unimplemented annotation type: Widget signature');
         return false;
       }
+      */
 
       return parent.isViewable.call(this);
     }
