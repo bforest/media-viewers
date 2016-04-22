@@ -1803,7 +1803,19 @@
        */
       onDownloadPDFClick : function PdfJs_onDownloadPDFClick(p_obj)
       {
-         window.location.href = this.wp.getThumbnailUrl(this.attributes.src) + "&a=true";
+         var documentName = "document.pdf";
+         if (this.wp.options.name) {
+            documentName = this.wp.options.name.split('.')[0] + ".pdf";
+         }
+
+         var url = this.wp.getThumbnailUrl(this.attributes.src);
+
+         // file attachment
+         url += '&saveName=' + documentName; // for pdf.js browser embed
+         url += '&attach=true';              // for modified repo webscript
+         url += '&filename=' + documentName; // for modified repo webscript
+
+         window.location.href = url;
       },
 
       /**
