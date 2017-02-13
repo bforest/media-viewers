@@ -72,6 +72,7 @@
       this.wp = wp;
       this.wp.id = wp.id; // needed by Alfresco.util.createYUIButton
       this.attributes = YAHOO.lang.merge(Alfresco.util.deepCopy(this.attributes), attributes);
+      this.isIOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
       
       /*
        * Custom events
@@ -1793,7 +1794,12 @@
        */
       onDownloadClick : function PdfJs_onDownloadClick(p_obj)
       {
-         window.location.href = this.wp.getContentUrl(true);
+        var contentUrl = this.wp.getContentUrl(true);
+        if (this.isIOS) {
+          window.open(contentUrl,'_blank');
+        } else {
+          window.location.href = contentUrl;
+        }
       },
 
       /**
@@ -1815,7 +1821,11 @@
          url += '&attach=true';              // for modified repo webscript
          url += '&filename=' + documentName; // for modified repo webscript
 
-         window.location.href = url;
+        if (this.isIOS) {
+          window.open(url,'_blank');
+        } else {
+          window.location.href = url;
+        }
       },
 
       /**
